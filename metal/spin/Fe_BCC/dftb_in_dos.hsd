@@ -20,14 +20,22 @@ Hamiltonian = DFTB {
   }
   Charge = 0.0
   SpinPolarisation = Colinear {
-    UnpairedElectrons = 0.0
-    RelaxTotalSpin = Yes
+    #RelaxTotalSpin = Yes
+    #UnpairedElectrons = 0.0
+    #InitialSpins = {
+    #  AtomSpin = {
+    #    Atoms = 1:1
+    #    SpinPerAtom = -4.0
+    #  }
+    #  AtomSpin = {
+    #    Atoms = 2:2
+    #    SpinPerAtom = +4.0
+    #  }
+    #}
   }
-  SpinConstants = {  # These are dummy spin constants, never use them!
-    Fe = {
- -4.100000000000000E-002 -4.000000000000000E-002 -4.000000000000000E-002
- -4.000000000000000E-002 -4.200000000000000E-002 -4.200000000000000E-002
- -4.000000000000000E-002 -4.200000000000000E-002 -5.300000000000000E-002
+  SpinConstants {
+    Fe {
+      -0.015 #Wdd
     }
   }
   Filling = Fermi {

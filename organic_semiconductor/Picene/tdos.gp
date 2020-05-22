@@ -1,12 +1,17 @@
+# get data
+set table "tdos_main.dat"
+plot "tdos.dat" u 2:3 w p
+unset table
+
 # get data size
-stats "tdos.dat" using 1 nooutput
+stats "tdos_main.dat" using 1 nooutput
 N = STATS_records   # total number of lines
 
 # declare Array
 array data[N]
 
 # save
-stats "tdos.dat" using (data[$0+1] = $1, 0) nooutput
+stats "tdos_main.dat" using (data[$0+1] = $1, 0) nooutput
 
 # get fermi energy data
 set table "info_gnu.dat"
@@ -20,7 +25,7 @@ unset table
 
 # gauss broadening
 gauss(x,c,r,s)=r*1/(s*sqrt(2*pi))*exp(-0.5*((x-c)/s)**2)
-stats "tdos.dat" using 1:2 nooutput
+stats "tdos_main.dat" using 1:2 nooutput
 xmin = STATS_min_x 
 xmax = STATS_max_x 
 array eV[300]

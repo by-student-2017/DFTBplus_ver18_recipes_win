@@ -8,7 +8,7 @@ PN = TN/BN
 array data[TN]
 
 # save
-stats "band.dat" using (data[$0+1] = $1, 0) nooutput
+stats "band.dat" using (data[$0+1] = $2, 0) nooutput
 
 # arrange data
 set print "band_spin.plot"

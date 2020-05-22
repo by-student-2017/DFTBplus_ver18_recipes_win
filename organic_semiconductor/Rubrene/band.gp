@@ -1,5 +1,10 @@
+# get data
+set table "band_main.dat"
+plot "band.dat" u 2:3 w p
+unset table
+
 # get data size
-stats "band.dat" using 1 nooutput
+stats "band_main.dat" using 1 nooutput
 TN = STATS_records   # total number of lines
 BN = STATS_blank 
 PN = TN/BN
@@ -8,7 +13,7 @@ PN = TN/BN
 array data[TN]
 
 # save
-stats "band.dat" using (data[$0+1] = $1, 0) nooutput
+stats "band_main.dat" using (data[$0+1] = $1, 0) nooutput
 
 # arrange data
 set print "band.plot"
@@ -32,7 +37,7 @@ unset table
 set terminal png
 set output "band.png"
 unset xtics
-set yrange [-30:30]
+set yrange [-7:5]
 set ylabel "Energy (eV)"
 plot "band.plot" u 1:2 w p pt 7 ps 0.6 t ""
 
@@ -40,7 +45,7 @@ plot "band.plot" u 1:2 w p pt 7 ps 0.6 t ""
 set terminal png
 set output "band_BE.png"
 unset xtics
-set yrange [30:-30]
+set yrange [7:-5]
 set ylabel "Binding Energy (eV)"
 set xzeroaxis
 plot "band.plot" u 1:(ef-$2) w p pt 7 ps 0.6 t ""

@@ -16,18 +16,26 @@ Hamiltonian = DFTB {
   ReadInitialCharges = Yes
   Mixer = Broyden {}
   MaxAngularMomentum = {
-    Ga = "d"
+    As = "p"
   }
   Charge = 0.0
   SpinPolarisation = Colinear {
-    UnpairedElectrons = 0.0
-    RelaxTotalSpin = Yes
+    #RelaxTotalSpin = Yes
+    #UnpairedElectrons = 0.0
+    #InitialSpins = {
+    #  AtomSpin = {
+    #    Atoms = 1:1
+    #    SpinPerAtom = -1.0
+    #  }
+    #  AtomSpin = {
+    #    Atoms = 2:2
+    #    SpinPerAtom = +1.0
+    #  }
+    #}
   }
-  SpinConstants = {  # These are dummy spin constants, never use them!
-    Ga = {
- -4.100000000000000E-002 -4.000000000000000E-002 -4.000000000000000E-002
- -4.000000000000000E-002 -4.200000000000000E-002 -4.200000000000000E-002
- -4.000000000000000E-002 -4.200000000000000E-002 -5.300000000000000E-002
+  SpinConstants {
+    As {
+      -0.00155 #Wpp
     }
   }
   Filling = Fermi {
@@ -48,22 +56,17 @@ Hamiltonian = DFTB {
   }
   #OrbitalPotential = {
   #  Functional = {pSIC}
-  #  Ga = {
+  #  As = {
   #    Shells = {1 2}
-  #    #UJ = 0.05209025
-  #    UJ = 0.039462
-  #  }
-  #  Ga = {
-  #    Shells = {3}
-  #    #UJ = 0.05209025
-  #    UJ = 0.039462
+  #    #UJ = 0.068207
+  #    UJ = 0.090033
   #  }
   #}
 }
 
 Options = {
   WriteAutotestTag = Yes
-  CalculateForces = Yes
+  #CalculateForces = Yes
 }
 
 ParserOptions = {

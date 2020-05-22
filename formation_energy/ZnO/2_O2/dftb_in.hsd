@@ -25,17 +25,23 @@ Hamiltonian = DFTB {
   }
   Charge = 0.0
   SpinPolarisation = Colinear {
-    UnpairedElectrons = 0.0
     RelaxTotalSpin = Yes
+    #UnpairedElectrons = 0.0
+    #InitialSpins = {
+    #  AtomSpin = {
+    #    Atoms = 1:1
+    #    SpinPerAtom = -2.0
+    #  }
+    #  AtomSpin = {
+    #    Atoms = 2:2
+    #    SpinPerAtom = +2.0
+    #  }
+    #}
   }
-  SpinConstants = {  # These are dummy spin constants, never use them!
-    O = {
- -5.000000000000000E-002 -2.800000000000000E-002
- -2.800000000000000E-002 -3.000000000000000E-002
+  SpinConstants {
+    O {
+      -0.028 #Wpp
     }
-  }
-  Filling = Fermi {
-    Temperature [Kelvin] = 1.000000000000000E-006
   }
   SlaterKosterFiles = Type2FileNames {
     Prefix = ".\znorg-0-1\"
@@ -49,7 +55,7 @@ Hamiltonian = DFTB {
 
 Options = {
   WriteAutotestTag = Yes
-  CalculateForces = Yes
+  #CalculateForces = Yes
 }
 
 ParserOptions = {

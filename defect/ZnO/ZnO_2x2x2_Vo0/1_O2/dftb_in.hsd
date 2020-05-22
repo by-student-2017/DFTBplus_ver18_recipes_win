@@ -1,0 +1,73 @@
+Geometry = GenFormat {
+2  F
+ O
+     1    1    0.000000000000000   0.000000000000000   0.057000000000000
+     2    1    0.000000000000000   0.000000000000000  -0.057000000000000
+        0.0000000000         0.0000000000         0.0000000000
+       20.0000000000         0.0000000000         0.0000000000
+        0.0000000000        20.0000000000         0.0000000000
+        0.0000000000         0.0000000000        20.0000000000
+}
+
+#Driver = {}
+Driver = ConjugateGradient {
+  LatticeOpt = Yes
+  MovedAtoms = {}
+}
+
+Hamiltonian = DFTB {
+  SCC = Yes
+  SCCTolerance = 1.0E-5
+  MaxSCCIterations = 1000
+  Mixer = Broyden {}
+  MaxAngularMomentum = {
+     O = "p"
+  }
+  Charge = 0.0
+  SpinPolarisation = Colinear {
+    RelaxTotalSpin = Yes
+    #UnpairedElectrons = 0.0
+    #InitialSpins = {
+    #  AtomSpin = {
+    #    Atoms = 1:1
+    #    SpinPerAtom = -2.0
+    #  }
+    #  AtomSpin = {
+    #    Atoms = 2:2
+    #    SpinPerAtom = +2.0
+    #  }
+    #}
+  }
+  SpinConstants {
+    O {
+      -0.028 #Wpp
+    }
+  }
+  Filling = MethfesselPaxton {
+    Temperature [Kelvin] = 5.0e+2
+    Order = 2
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = ".\znorg-0-1\"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  KPointsAndWeights = {
+   0.0 0.0 0.0  1.0
+  }
+}
+
+Options = {
+  WriteAutotestTag = Yes
+  #CalculateForces = Yes
+}
+
+ParserOptions = {
+  ParserVersion = 8
+}
+
+#Parallel {
+  # Allow OMP threads explicitely to test for hybrid parallelisation with
+  # MPI-binary. (Check the manual before using this in production runs!)
+#  UseOmpThreads = Yes
+#}

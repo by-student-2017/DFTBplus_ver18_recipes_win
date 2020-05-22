@@ -21,18 +21,25 @@ Hamiltonian = DFTB {
   }
   Charge = 0.0
   SpinPolarisation = Colinear {
-    UnpairedElectrons = 0.0
-    RelaxTotalSpin = Yes
+    #RelaxTotalSpin = Yes
+    #UnpairedElectrons = 0.0
+    #InitialSpins = {
+    #  AtomSpin = {
+    #    Atoms = 1:1
+    #    SpinPerAtom = -1.0
+    #  }
+    #  AtomSpin = {
+    #    Atoms = 2:2
+    #    SpinPerAtom = +1.0
+    #  }
+    #}
   }
-  SpinConstants = {  # These are dummy spin constants, never use them!
-    Ga = {
- -4.100000000000000E-002 -4.000000000000000E-002 -4.000000000000000E-002
- -4.000000000000000E-002 -4.200000000000000E-002 -4.200000000000000E-002
- -4.000000000000000E-002 -4.200000000000000E-002 -5.300000000000000E-002
+  SpinConstants {
+    Ga {
+      -0.0305 #Wdd
     }
-    As = {
- -5.000000000000000E-002 -2.800000000000000E-002
- -2.800000000000000E-002 -3.000000000000000E-002
+    As {
+      -0.00155 #Wpp
     }
   }
   Filling = Fermi {
@@ -71,7 +78,7 @@ Hamiltonian = DFTB {
 
 Options = {
   WriteAutotestTag = Yes
-  CalculateForces = Yes
+  #CalculateForces = Yes
 }
 
 Analysis {
