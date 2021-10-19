@@ -1,0 +1,127 @@
+Geometry = GenFormat {
+10  F
+ Zr Y O
+     1    1    0.000000000         0.000000000         0.000000000
+     2    1    0.500000000         0.000000000         0.500000000
+     3    1    0.500000000         0.500000000         0.000000000
+     4    2    0.000000000         0.500000000         0.500000000
+     5    3    0.250000000         0.750000000         0.750000000
+     6    3    0.250000000         0.250000000         0.750000000
+     7    3    0.250000000         0.750000000         0.250000000
+     8    3    0.750000000         0.750000000         0.250000000
+     9    3    0.750000000         0.250000000         0.250000000
+    10    3    0.750000000         0.250000000         0.750000000
+        0.0000000000         0.0000000000         0.0000000000
+        5.1499700000         0.0000000000         0.0000000000
+        0.0000000000         5.1499700000         0.0000000000
+        0.0000000000         0.0000000000         5.1499700000
+}
+
+Driver = {}
+#Driver = ConjugateGradient {
+#  LatticeOpt = Yes
+#  MovedAtoms = 1:-1
+#}
+
+Hamiltonian = DFTB {
+  SCC = Yes
+  SCCTolerance = 1.0E-8
+  MaxSCCIterations = 1000
+  Mixer = Broyden {}
+  MaxAngularMomentum = {
+    Zr = "d"
+     Y = "d"
+     O = "p"
+  }
+  Charge = 0.0
+  SpinPolarisation = Colinear {
+    RelaxTotalSpin = Yes
+    #UnpairedElectrons = 0.0
+    #InitialSpins = {
+    #  AtomSpin = {
+    #    Atoms = 1:1
+    #    SpinPerAtom = -2.0
+    #  }
+    #  AtomSpin = {
+    #    Atoms = 2:2
+    #    SpinPerAtom = -2.0
+    #  }
+    #  AtomSpin = {
+    #    Atoms = 3:3
+    #    SpinPerAtom = +2.0
+    #  }
+    #}
+  }
+  SpinConstants {
+    Zr {
+      -0.021 #Wdd
+    }
+    Y {
+      -0.021 #Wdd
+    }
+    O {
+      -0.028 #Wpp
+    }
+  }
+  Filling = MethfesselPaxton {
+    Temperature [Kelvin] = 5.0e+2
+    Order = 2
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = ".\ref6_ZrYO\"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  KPointsAndWeights = SupercellFolding {
+   4 0 0
+   0 4 0
+   0 0 4
+   0.5 0.5 0.5
+  }
+  #OrbitalPotential = {
+  #  Functional = {pSIC}
+  #  Zr = {
+  #    Shells = {1 2}
+  #    #UJ = 0.05209025
+  #    UJ = 0.039462
+  #  }
+  #  Zr = {
+  #    Shells = {3}
+  #    UJ = 0.05209025
+  #    #UJ = 0.039462
+  #  }
+  #  Y = {
+  #    Shells = {1 2}
+  #    #UJ = 0.05209025
+  #    UJ = 0.039462
+  #  }
+  #  Y = {
+  #    Shells = {3}
+  #    UJ = 0.05209025
+  #    #UJ = 0.039462
+  #  }
+  #  O = {
+  #    Shells = {1 2}
+  #    UJ = 0.068207
+  #    #UJ = 0.090033
+  #  }
+  #}
+}
+
+Options = {
+  WriteAutotestTag = Yes
+}
+
+Analysis = {
+  CalculateForces = Yes
+}
+
+ParserOptions = {
+  ParserVersion = 6
+}
+
+#Parallel {
+  # Allow OMP threads explicitely to test for hybrid parallelisation with
+  # MPI-binary. (Check the manual before using this in production runs!)
+#  UseOmpThreads = Yes
+#}
